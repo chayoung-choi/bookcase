@@ -1,12 +1,9 @@
 package com.eden.bookcase.member.api;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.Repository;
 
-import java.util.Optional;
-
-
-public interface MemberRepository extends CrudRepository<Member, String> {
-  Optional<Member> findById(String id);
+public interface MemberRepository extends Repository<Member, String> {
+  Member findById(String id);
 
   Member save(Member id);
 }

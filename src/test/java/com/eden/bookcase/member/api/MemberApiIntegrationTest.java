@@ -7,9 +7,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -20,19 +17,20 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class MemberApiIntegrationTest {
   @Autowired
   private MemberRepository memberRepository;
-
   @Autowired
   private MockMvc mvc;
 
   @Test
-  void name() throws Exception {
-
+  void confirm() throws Exception {
+    // arrange (given)
     memberRepository.save(new Member("id", MemberStatus.WAITING));
 
+    // act  (when)
     mvc.perform(post("/members/{id}/confirm", "id"))
-        .andExpect(status().isOk());
+            .andExpect(status().isOk());
 
-    Optional<Member> m = memberRepository.findById("id");
-//    assertThat(m.getStatus()).isEqualTo(MemberStatus.ACTIVE);
+    // assert  (then)
+    Member m = memberRepository.findById("id");
+    assertThat(m.getStatus()).isEqualTo(MemberStatus.ACTIVE);
   }
 }

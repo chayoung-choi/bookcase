@@ -1,4 +1,4 @@
-package com.eden.bookcase.user;
+package com.eden.bookcase.member.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +10,10 @@ import org.springframework.test.web.servlet.MockMvc;
 @SpringBootTest
 @AutoConfigureMockMvc
 @Sql("classpath:init.sql")
-public class UserApiControllerTest {
+public class MemberApiControllerTest {
 
-//  @Autowired
-//  private MemberRepository memberRepository;
+  @Autowired
+  private MemberRepository memberRepository;
 
   @Autowired
   private MockMvc mvc;
@@ -21,7 +21,7 @@ public class UserApiControllerTest {
   @Test
   void confirm() throws Exception {
 
-//    memberRepository.save(new Member("id", PMemberStatus.WAITING));
+    memberRepository.save(new Member("id", MemberStatus.WAITING));
 //
 //    mvc.perform(post("/members/{id}/confirm", "id"))
 //            .andExpect(status().isOk());

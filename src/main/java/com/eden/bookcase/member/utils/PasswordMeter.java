@@ -1,4 +1,4 @@
-package com.eden.bookcase.user.utils;
+package com.eden.bookcase.member.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

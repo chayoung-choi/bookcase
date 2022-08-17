@@ -1,4 +1,4 @@
-package com.eden.bookcase.user.utils;
+package com.eden.bookcase.member.utils;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
