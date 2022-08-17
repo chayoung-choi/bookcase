@@ -1,5 +1,12 @@
-package com.eden.bookcase.member.api;
+package com.eden.bookcase.member.app;
 
+import com.eden.bookcase.member.domain.Member;
+import com.eden.bookcase.member.domain.MemberStatus;
+import com.eden.bookcase.member.exception.MemberAlreadyActivatedException;
+import com.eden.bookcase.member.exception.MemberNotFoundException;
+import com.eden.bookcase.member.repository.MemberRepository;
+import com.eden.bookcase.member.repository.MemoryMemberRepository;
+import com.eden.bookcase.member.service.ConfirmMemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,5 +1,6 @@
 package com.eden.bookcase.member.api;
 
+import com.eden.bookcase.member.service.ConfirmMemberService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;

@@ -1,4 +1,4 @@
-package com.eden.bookcase.member.api;
+package com.eden.bookcase.member.exception;
 
 public class MemberAlreadyActivatedException extends RuntimeException {
 }

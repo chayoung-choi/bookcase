@@ -1,4 +1,6 @@
-package com.eden.bookcase.member.api;
+package com.eden.bookcase.member.repository;
+
+import com.eden.bookcase.member.domain.Member;
 
 import java.util.HashMap;
 import java.util.Map;

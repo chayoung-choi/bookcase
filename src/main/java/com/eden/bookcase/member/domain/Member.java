@@ -1,5 +1,6 @@
-package com.eden.bookcase.member.api;
+package com.eden.bookcase.member.domain;
 
+import com.eden.bookcase.member.exception.MemberAlreadyActivatedException;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
