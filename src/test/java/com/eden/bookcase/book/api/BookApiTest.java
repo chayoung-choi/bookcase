@@ -1,41 +1,38 @@
 package com.eden.bookcase.book.api;
 
+import com.eden.bookcase.book.dto.DaumBookResponseDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.client.RestClientTest;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.client.MockRestServiceServer;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 
-import java.util.Objects;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.method;
+import static org.springframework.test.web.client.match.MockRestRequestMatchers.requestTo;
+import static org.springframework.test.web.client.response.MockRestResponseCreators.withSuccess;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-@SpringBootTest
 @Slf4j
+@RestClientTest(BookApi.class)
 public class BookApiTest {
-
-  @Value("${app.kakao.host}")
-  private String KAKAO_HOST;
-  @Value("${app.kakao.api-key}")
-  private String KAKAO_API_KEY;
+  @Autowired
+  private MockRestServiceServer mockServer;
 
   @Test
-  void Daum_책_조회() {
-    String title = "개발자";
+  void Daum_책_조회_API() {
+    MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
+    params.add("query", "개발자");
 
-    DaumBookResponseDto daumBookResponseDto = searchBooksFromDaum(title);
-    daumBookResponseDto.getDocuments().forEach(b -> log.info(b.getTitle()));
-    log.info("[daumBookResponseDto] {}", daumBookResponseDto);
+    DaumBookResponseDto daumBookResponseDto = new DaumBookResponseDto();
 
-    assertThat(Objects.nonNull(daumBookResponseDto.getDocuments()));
-  }
+    mockServer
+        .expect(requestTo("/daum/book"))
+        .andExpect(method(HttpMethod.GET))
+        .andRespond(withSuccess(daumBookResponseDto.toString(), MediaType.APPLICATION_JSON));
 
-  private DaumBookResponseDto searchBooksFromDaum(String title) {
-    WebClient client = WebClient.create(KAKAO_HOST);
-    return client.get()
-        .uri(String.format("/v3/search/book?target=title&query=%s", title))
-        .header("Authorization", KAKAO_API_KEY)
-        .retrieve()
-        .bodyToMono(DaumBookResponseDto.class).block();
+    log.info(daumBookResponseDto.toString());
   }
 }
