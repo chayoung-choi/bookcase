@@ -13,21 +13,21 @@ import javax.persistence.Table;
 public class Member {
 
   @Id
-  private String id;
+  private String uid;
   private MemberStatus status;
 
 
-  public Member(String id, MemberStatus status) {
-    this.id = id;
+  public Member(String uid, MemberStatus status) {
+    this.uid = uid;
     this.status = status;
   }
 
-  public String getId() {
-    return id;
+  public String getUid() {
+    return uid;
   }
 
-  public void setId(String id) {
-    this.id = id;
+  public void setUid(String uid) {
+    this.uid = uid;
   }
 
   public MemberStatus getStatus() {

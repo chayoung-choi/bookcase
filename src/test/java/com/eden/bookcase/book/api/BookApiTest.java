@@ -2,6 +2,7 @@ package com.eden.bookcase.book.api;
 
 import com.eden.bookcase.book.service.BookService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class BookApiTest {
 
   @DisplayName("[API][GET] Daum 책 조회")
   @Test
+  @Disabled
   void getDaumBook() throws Exception {
     MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
     params.add("query", "개발자");

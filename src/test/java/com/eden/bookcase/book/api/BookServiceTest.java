@@ -4,6 +4,7 @@ import com.eden.bookcase.book.dto.DaumBookResponseDto;
 import com.eden.bookcase.book.service.BookService;
 import com.eden.bookcase.book.vo.RequestSearchBook;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ public class BookServiceTest {
   @Autowired
   private BookService bookService;
 
+  @DisplayName("Daum 책 조회")
   @Test
   void Daum_책_조회() {
     RequestSearchBook requestSearchBook = new RequestSearchBook();
@@ -26,6 +28,7 @@ public class BookServiceTest {
     assertThat(daumBookResponseDto.getDocuments().size() > 0);
   }
 
+  @DisplayName("Daum 책 검색결과 없음")
   @Test
   void Daum_책_검색결과_없음() {
     RequestSearchBook requestSearchBook = new RequestSearchBook();
