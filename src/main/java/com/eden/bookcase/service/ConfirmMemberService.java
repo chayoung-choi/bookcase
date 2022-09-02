@@ -21,7 +21,7 @@ public class ConfirmMemberService {
     if (userEntity == null) {
       throw new MemberNotFoundException();
     }
-    userEntity.confirm();
+//    userEntity.confirm();
   }
 
 }

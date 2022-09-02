@@ -1,1 +1,1 @@
-truncate table userEntity;
+-- truncate table userEntity;

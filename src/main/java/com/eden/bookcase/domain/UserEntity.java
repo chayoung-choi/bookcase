@@ -1,9 +1,11 @@
 package com.eden.bookcase.domain;
 
-import com.eden.bookcase.constants.UserStatus;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Data
 @Entity
@@ -11,8 +13,8 @@ import javax.persistence.*;
 public class UserEntity {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
+  @Column(nullable = false, unique = true)
+  private String id;
 
   @Column(nullable = false, length = 50)
   private String email;
@@ -20,13 +22,10 @@ public class UserEntity {
   @Column(nullable = false, length = 50)
   private String name;
 
-  @Column(nullable = false, unique = true)
-  private String uid;
+//  @Column(nullable = false)
+//  private String encryptedPwd;
 
-  @Column(nullable = false)
-  private String encryptedPwd;
-
-  private UserStatus status;
+//  private UserStatus status;
 
 //
 //  public User(String id, UserStatus status) {

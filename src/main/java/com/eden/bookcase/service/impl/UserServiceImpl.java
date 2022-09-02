@@ -5,41 +5,48 @@ import com.eden.bookcase.dto.UserDto;
 import com.eden.bookcase.repository.UserRepository;
 import com.eden.bookcase.service.UserService;
 import org.modelmapper.ModelMapper;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-  private ModelMapper modelMapper;
+  private ModelMapper mapper;
 
   private UserRepository userRepository;
 
   public UserServiceImpl(ModelMapper modelMapper, UserRepository userRepository) {
-    this.modelMapper = modelMapper;
+    this.mapper = modelMapper;
     this.userRepository = userRepository;
   }
 
   @Override
-  public UserDto getUserById(String id) {
-    UserEntity userEntity = userRepository.findById(id);
-    UserDto userDto = modelMapper.map(userEntity, UserDto.class);
+  public UserDto getUserByUid(String uid) {
+    UserEntity userEntity = userRepository.findById(uid);
+    UserDto userDto = mapper.map(userEntity, UserDto.class);
     return userDto;
   }
 
-  @Override
-  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    UserEntity userEntity = userRepository.findByEmail(email);
-    if (userEntity == null) {
-      throw new UsernameNotFoundException(email);
-    }
+//  @Override
+//  public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+//    UserEntity userEntity = userRepository.findByEmail(email);
+//    if (userEntity == null) {
+//      throw new UsernameNotFoundException(email);
+//    }
+//
+//    return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
+//        true, true, true, true,
+//        new ArrayList<>());
+//  }
 
-    return new User(userEntity.getEmail(), userEntity.getEncryptedPwd(),
-            true, true, true, true,
-            new ArrayList<>());
+  @Override
+  public UserDto createUser(UserDto userDto) {
+    userDto.setId(UUID.randomUUID().toString());
+
+    UserEntity userEntity = mapper.map(userDto, UserEntity.class);
+
+    userRepository.save(userEntity);
+    return mapper.map(userEntity, UserDto.class);
   }
 }
