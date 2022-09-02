@@ -1,5 +1,6 @@
 package com.eden.bookcase.utils;
 
+import com.eden.bookcase.constants.PasswordStrength;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 

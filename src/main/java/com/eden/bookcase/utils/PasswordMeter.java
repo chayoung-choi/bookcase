@@ -1,5 +1,7 @@
 package com.eden.bookcase.utils;
 
+import com.eden.bookcase.constants.PasswordStrength;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

@@ -1,8 +1,8 @@
 package com.eden.bookcase.book.api;
 
-import com.eden.bookcase.book.dto.DaumBookResponseDto;
-import com.eden.bookcase.book.service.BookService;
-import com.eden.bookcase.book.vo.RequestSearchBook;
+import com.eden.bookcase.dto.DaumBookResponseDto;
+import com.eden.bookcase.service.BookService;
+import com.eden.bookcase.vo.RequestSearchBook;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
