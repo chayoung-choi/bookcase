@@ -25,10 +25,9 @@ public class UserApi {
 
   @GetMapping("/users/{id}")
   public ResponseEntity getUser(@PathVariable String id) {
-//    ResponseMember returnValue = new ModelMapper().map(userDto, ResponseMember.class);
-//    return ResponseEntity.ok(ResponseMember);
-    UserDto userDto = userService.getUserByUid(id);
-    return ResponseEntity.ok("OK");
+    UserDto userDto = userService.getUserById(id);
+    ResponseUser responseUser = mapper.map(userDto, ResponseUser.class);
+    return ResponseEntity.ok(responseUser);
   }
 
   @PostMapping("/users")
