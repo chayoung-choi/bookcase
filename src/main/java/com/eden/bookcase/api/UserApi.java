@@ -27,7 +27,7 @@ public class UserApi {
   public ResponseEntity getUser(@PathVariable String id) {
     UserDto userDto = userService.getUserById(id);
     ResponseUser responseUser = mapper.map(userDto, ResponseUser.class);
-    return ResponseEntity.ok(responseUser);
+    return ResponseEntity.status(HttpStatus.OK).body(responseUser);
   }
 
   @PostMapping("/users")

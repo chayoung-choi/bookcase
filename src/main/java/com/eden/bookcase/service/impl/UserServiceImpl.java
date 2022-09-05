@@ -5,6 +5,7 @@ import com.eden.bookcase.dto.UserDto;
 import com.eden.bookcase.repository.UserRepository;
 import com.eden.bookcase.service.UserService;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -24,6 +25,9 @@ public class UserServiceImpl implements UserService {
   @Override
   public UserDto getUserById(String id) {
     UserEntity userEntity = userRepository.findById(id);
+    if (userEntity == null) {
+      throw new UsernameNotFoundException("찾을 수 없는 사용자입니다.");
+    }
     UserDto userDto = mapper.map(userEntity, UserDto.class);
     return userDto;
   }
