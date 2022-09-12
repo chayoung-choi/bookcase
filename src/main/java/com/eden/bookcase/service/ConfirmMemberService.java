@@ -6,6 +6,7 @@ import com.eden.bookcase.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Service
 public class ConfirmMemberService {
@@ -17,7 +18,7 @@ public class ConfirmMemberService {
 
   @Transactional
   public void confirm(String id) {
-    UserEntity userEntity = userRepository.findById(id);
+    Optional<UserEntity> userEntity = userRepository.findById(id);
     if (userEntity == null) {
       throw new MemberNotFoundException();
     }

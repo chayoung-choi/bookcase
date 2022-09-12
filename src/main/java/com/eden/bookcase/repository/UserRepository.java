@@ -1,12 +1,11 @@
 package com.eden.bookcase.repository;
 
 import com.eden.bookcase.domain.UserEntity;
-import org.springframework.data.repository.Repository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends Repository<UserEntity, String> {
-  UserEntity findById(String id);
+public interface UserRepository extends CrudRepository<UserEntity, String> {
+
 
   UserEntity findByEmail(String username);
 
-  UserEntity save(UserEntity id);
 }

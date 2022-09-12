@@ -1,6 +1,5 @@
 package com.eden.bookcase.user.app;
 
-import com.eden.bookcase.domain.UserEntity;
 import com.eden.bookcase.exception.MemberAlreadyActivatedException;
 import com.eden.bookcase.exception.MemberNotFoundException;
 import com.eden.bookcase.repository.MemoryUserRepository;
@@ -40,7 +39,7 @@ public class ConfirmUserServiceTestEntity {
     confirmMemberService.confirm(ID);
 
     // assert  (then)
-    UserEntity m = userRepository.findById(ID);
+//    UserEntity m = userRepository.findById(ID);
 //    assertThat(m.getStatus()).isEqualTo(UserStatus.ACTIVE);
   }
 }
