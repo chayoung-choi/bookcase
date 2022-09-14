@@ -1,6 +1,7 @@
 package com.eden.bookcase.service;
 
 import com.eden.bookcase.dto.UserDto;
+import com.eden.bookcase.exception.BusinessException;
 import com.eden.bookcase.repository.UserRepository;
 import com.eden.bookcase.service.impl.UserServiceImpl;
 import org.junit.jupiter.api.BeforeAll;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest
 @DisplayName("User-Service")
@@ -30,7 +32,7 @@ class UserServiceTest {
   @BeforeAll
   static void beforeAll() {
     userDto = new UserDto();
-    userDto.setEmail("test@gmail.com");
+    userDto.setEmail("test1@gmail.com");
     userDto.setName("test");
     userDto.setPwd("test1234");
   }
@@ -55,5 +57,11 @@ class UserServiceTest {
     assertThat(responseUser.getEmail()).isEqualTo(userDto.getEmail());
   }
 
-
+  @Test
+  @DisplayName("사용자 생성 전 이메일 중복 체크")
+  void checkEmailBeforeCreateUser() {
+    assertThrows(BusinessException.class, () -> {
+      userDto = userService.createUser(userDto);
+    });
+  }
 }

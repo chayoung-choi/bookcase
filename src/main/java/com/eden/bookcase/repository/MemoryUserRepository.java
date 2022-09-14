@@ -73,7 +73,7 @@ public class MemoryUserRepository implements UserRepository {
   }
 
   @Override
-  public UserEntity findByEmail(String username) {
+  public Optional<UserEntity> findByEmail(String username) {
     return null;
   }
 }

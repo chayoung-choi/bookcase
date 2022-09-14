@@ -1,9 +1,12 @@
 package com.eden.bookcase.service.impl;
 
+import com.eden.bookcase.constants.ErrorCode;
 import com.eden.bookcase.domain.UserEntity;
 import com.eden.bookcase.dto.UserDto;
+import com.eden.bookcase.exception.BusinessException;
 import com.eden.bookcase.repository.UserRepository;
 import com.eden.bookcase.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -47,8 +51,13 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDto createUser(UserDto userDto) {
+    Optional<UserEntity> checkUser = userRepository.findByEmail(userDto.getEmail());
+    if (checkUser.isPresent()) {
+      log.info("createUser : {}", userDto.getEmail());
+      log.info("checkUser : {}", checkUser.get().getEmail());
+      throw new BusinessException(ErrorCode.CONFLICT_EMAIL);
+    }
     userDto.setId(UUID.randomUUID().toString());
-
     UserEntity userEntity = mapper.map(userDto, UserEntity.class);
 
     userRepository.save(userEntity);
@@ -62,9 +71,9 @@ public class UserServiceImpl implements UserService {
 
   @Override
   public UserDto getUserDetailsByEmail(String email) {
-    UserEntity userEntity = userRepository.findByEmail(email);
+    Optional<UserEntity> userEntity = userRepository.findByEmail(email);
 
-    if (userEntity == null) {
+    if (userEntity.isPresent()) {
       throw new UsernameNotFoundException(email);
     }
 
