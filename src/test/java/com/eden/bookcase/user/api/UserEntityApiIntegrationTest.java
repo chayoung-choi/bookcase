@@ -1,6 +1,5 @@
 package com.eden.bookcase.user.api;
 
-import com.eden.bookcase.domain.UserEntity;
 import com.eden.bookcase.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@Sql("classpath:init.sql")
+@Sql("classpath:data.sql")
 public class UserEntityApiIntegrationTest {
   @Autowired
   private UserRepository userRepository;
@@ -28,10 +27,10 @@ public class UserEntityApiIntegrationTest {
 
     // act  (when)
     mvc.perform(post("/members/{id}/confirm", "id"))
-        .andExpect(status().isOk());
+            .andExpect(status().isOk());
 
     // assert  (then)
-    UserEntity m = userRepository.findById("id");
+//    UserEntity m = userRepository.findById("id");
 //    assertThat(m.getStatus()).isEqualTo(UserStatus.ACTIVE);
   }
 }
