@@ -9,16 +9,20 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "users")
-public class UserEntity extends BaseTimeEntity {
+@Table(name = "bookcase")
+public class BookcaseEntity extends BaseTimeEntity {
+//  @CreatedBy | https://marsland.tistory.com/m/531
 
   @Id
   @Column(nullable = false, unique = true)
   private String id;
 
-  @Column(nullable = false, length = 50)
-  private String email;
-
-  @Column(nullable = false, length = 50)
+  @Column(nullable = false, unique = true)
   private String name;
+
+  @Column(nullable = false)
+  private String ownerId;
+
+  @Column(nullable = false)
+  private boolean isPrivate;
 }
