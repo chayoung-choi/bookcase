@@ -4,6 +4,7 @@ import com.eden.bookcase.dto.DaumBookResponseDto;
 import com.eden.bookcase.service.BookService;
 import com.eden.bookcase.vo.RequestBook;
 import com.eden.bookcase.vo.RequestSearchBook;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Description;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class BookApi {
   private final BookService bookService;
-
-  public BookApi(BookService bookService) {
-    this.bookService = bookService;
-  }
 
   @GetMapping("/daum/books")
   @Description("Daum API를 이용하여 도서를 검색한다.")
